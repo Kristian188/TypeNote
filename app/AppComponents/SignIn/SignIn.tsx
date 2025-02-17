@@ -9,6 +9,21 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { FaCheckDouble } from "react-icons/fa"
+
+export function AppLogo() {
+  return (
+    <div className="flex gap-2 items-center mb-11 justify-center ">
+      <div className="bg-primary p-2 text-white rounded-sm text-lg">
+        <FaCheckDouble/>
+      </div>
+      <div className="font-bold text-2x1 flex gap-1 justify-center items-center">
+        <span className="text-primary">Quick</span>
+        <span>Task</span>
+      </div>
+    </div>
+  )
+}
 
 export function LoginForm({
   className,
@@ -16,7 +31,8 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <AppLogo />
+      <Card className ="w-full max-w-sm py-2">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
