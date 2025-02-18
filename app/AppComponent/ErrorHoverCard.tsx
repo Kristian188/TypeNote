@@ -4,7 +4,7 @@ import { HoverCardTrigger } from "@/components/ui/hover-card";
 import { HoverCardContent } from "@/components/ui/hover-card";
 
 
-export function ErrorHoverCard({ message }: { message: string }) {
+export function ErrorHoverCard({ message }: { message: string | undefined }) {
     return (
         <div className="text-red-500 flex items-center gap-1">
             <div className="absolute right-2 top-8">
