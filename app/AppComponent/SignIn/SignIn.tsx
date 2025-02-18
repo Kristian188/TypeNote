@@ -11,7 +11,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { AppLogo } from  "./AppLogo"
+import { AppLogo } from  "../AppLogo";
+import EmailInput from "../EmailInput";
+import PasswordInput from "../PasswordInput";
+
 
 
 
@@ -29,24 +32,12 @@ export function LoginForm({
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
+        <CardContent className="grid gap-5 mt-3">
+            <EmailInput name="Email" label="email" />
+            <PasswordInput name="password" label="Password"/>
+            <PasswordInput name="confirmPassword" label="Confirm Password" />
+
+
               <div className ="mt-4  text-sm flex items-center justify-center gap-1">
                 <span>Don&apos;t have an account?</span>
                 <Label className ="text-primary">
@@ -55,9 +46,7 @@ export function LoginForm({
               </div>
               <Button type="submit" className="w-full flex" >
                 Login
-              </Button>
-            </div>
-          </form>
+              </Button> 
         </CardContent>
       </Card>
     </div>

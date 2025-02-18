@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { AppLogo } from "../signIn/AppLogo";
+import { AppLogo } from "../AppLogo";
+import EmailInput from "../EmailInput";
+import PasswordInput from "../PasswordInput";
 
 
 
@@ -23,8 +25,7 @@ export default function SignUp() {
     <div>
       <AppLogo />
       <Card className="w-full max-w-sm py-2">
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit, handleErrorsToast)}>
+
             <CardHeader>
               <CardTitle className="text-[22px] font-bold">Sign Up</CardTitle>
               <CardDescription>
@@ -38,17 +39,12 @@ export default function SignUp() {
               <div className="mt-4 text-sm flex items-center justify-center gap-1">
                 <span>Already have an account?</span>
                 <Label className="text-primary">
-                  <Link href="/">Sign in</Link>
+                  <Link href={"/"}>Sign in</Link>
                 </Label>
               </div>
             </CardContent>
             <CardFooter>
-              <Button type="submit" className="w-full">
-                {isLoading ? "loading..." : "create an account"}
-              </Button>
             </CardFooter>
-          </form>
-        </FormProvider>
       </Card>
     </div>
   );

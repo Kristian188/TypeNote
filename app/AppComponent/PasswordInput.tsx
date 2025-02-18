@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ErrorHoverCard } from "./ErrorHoverCard";
 
 
-function passwordInput({ name, label }: {name: string; label: string}) {
+function PasswordInput({ name, label }: {name: string; label: string}) {
     return (
         <div className="grid gap-2 relative">
             <Label htmlFor="password">{label}</Label>
@@ -18,4 +18,4 @@ function passwordInput({ name, label }: {name: string; label: string}) {
     );
 }
 
-export default passwordInput;
+export default PasswordInput;
