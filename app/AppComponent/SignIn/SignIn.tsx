@@ -9,21 +9,11 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { FaCheckDouble } from "react-icons/fa"
+import Link from "next/link";
 
-export function AppLogo() {
-  return (
-    <div className="flex gap-2 items-center mb-11 justify-center ">
-      <div className="bg-primary p-2 text-white rounded-sm text-lg">
-        <FaCheckDouble/>
-      </div>
-      <div className="font-bold text-2x1 flex gap-1 justify-center items-center">
-        <span className="text-primary">Quick</span>
-        <span>Task</span>
-      </div>
-    </div>
-  )
-}
+import { AppLogo } from  "./AppLogo"
+
+
 
 export function LoginForm({
   className,
@@ -56,6 +46,12 @@ export function LoginForm({
                   <Label htmlFor="password">Password</Label>
                 </div>
                 <Input id="password" type="password" required />
+              </div>
+              <div className ="mt-4  text-sm flex items-center justify-center gap-1">
+                <span>Don&apos;t have an account?</span>
+                <Label className ="text-primary">
+                  <Link href={"/sign-up"}>Sign up</Link>
+                </Label>
               </div>
               <Button type="submit" className="w-full flex" >
                 Login
