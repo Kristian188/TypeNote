@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
@@ -72,7 +71,6 @@ export function LoginForm({
         <CardContent className="grid gap-5 mt-3">
             <EmailInput name="Email" label="email" />
             <PasswordInput name="password" label="Password"/>
-            <PasswordInput name="confirmPassword" label="Confirm Password" />
 
 
               <div className ="mt-4  text-sm flex items-center justify-center gap-1">

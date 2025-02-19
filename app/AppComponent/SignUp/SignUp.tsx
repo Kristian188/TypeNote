@@ -88,6 +88,9 @@ function handleErrorsToast() {
               </div>
             </CardContent>
             <CardFooter>
+              <Button type="submit" className="w-full">
+                Create an account
+              </Button>
             </CardFooter>
             </form>
             </FormProvider>
