@@ -1,8 +1,20 @@
-import { integer, text, boolean, pgTable } from "drizzle-orm/pg-core";
+import { text, pgTable, timestamp } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("userTable", {
-    id: integer("id").primaryKey(),
+    id: text("id").primaryKey(),
     email: text("email").notNull().unique(),
-    hash_password: boolean("hash_password").notNull(),
+    hash_password: text("hash_password").notNull(),
 
 });
+
+export const sessionTable = pgTable("session", {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => userTable.id),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+      mode: "date",
+    }).notNull(),
+  });
+  
