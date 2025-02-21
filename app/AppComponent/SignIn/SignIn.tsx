@@ -8,6 +8,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
@@ -20,6 +21,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast"
 import z from "zod";
 import { authSchema } from "../validationSchema"
+import { useRouter } from "next/navigation"; 
+import { useState } from "react";
 
 
 type AuthFormData = z.infer<typeof authSchema>;
@@ -30,30 +33,51 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const methods = useForm<AuthFormData>({ resolver: zodResolver(authSchema) });
   const { toast } = useToast();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: AuthFormData) => {
-    console.log("Sign In Data:", data);
-    toast({ title: "Sign in successful!", description: "You have signed in."});
+  const onSubmit = async (data: AuthFormData) => {
+   try {
+    setIsLoading(true);
+    const response = await fetch("/api/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email: data.email, password: data.password}),
+    });
+    const result = await response.json();
+
+    if(response.ok) {
+      toast({ title: "Sign in successful!", description: "You have signed in."});
+      router.push("/to-dos");
+    } else { 
+      toast({ title: "Sign in failed!", description: result.error || "An unknown error occured", variant: "destructive"});
+
+    }
+   } catch (error) {
+    console.error("Sign in error:", error);
+    toast({ title: "Sign in failed!", description: "An unknown error occured. Please try again", variant: "destructive"});
+  } finally {
+    setIsLoading(false);
+  }
   };
 
   const handleErrorToast = () => {
     const { errors } = methods.formState;
+    const errorFields = ["email", "password"] as const;
 
-    if(errors.email) {
-      toast({
-        title: "Validation Error",
-        description: errors.email.message?.toString(),
-        variant: "destructive",
-      });
-    }
+    errorFields.forEach((field) => {
+      if(errors[field]) {
+        toast({
+          title: "Validation Error",
+          description: errors[field]?.message?.toString(),
+          variant: "destructive",
+        });
+      }
+    });
 
-    if(errors.password) {
-      toast({
-        title: "Validation Error",
-        description: errors.password.message?.toString(),
-        variant: "destructive",
-      });
-    }
+
   };
 
   return (
@@ -79,10 +103,12 @@ export function LoginForm({
                   <Link href={"/sign-up"}>Sign up</Link>
                 </Label>
               </div>
-              <Button type="submit" className="w-full flex" >
-                Login
-              </Button> 
         </CardContent>
+        <CardFooter>
+          <Button type="submit" className="w-full">
+            {isLoading ? "Loading..." : "Sign in"}
+          </Button>
+        </CardFooter>
         </form>
         </FormProvider>,
       </Card>
