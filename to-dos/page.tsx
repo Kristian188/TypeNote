@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogoutButton } from "@/LogoutBtn";
+import { LogoutButton } from "@/LogoutBtn"; 
 import { useUserStore } from "../stores/userStore";
 
 export default function Dashboard() {
@@ -44,7 +44,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <h1>Welcome, {user.email}</h1>
+            <p>Welcome, {user.email}</p>
             <LogoutButton />
         </div>
     )
