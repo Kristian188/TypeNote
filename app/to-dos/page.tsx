@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogoutButton } from "@/LogoutBtn"; 
-import { useUserStore } from "../stores/userStore";
-
+import { useUserStore } from "@/store/UserStore"; 
 export default function Dashboard() {
     const { setUser, user } = useUserStore();
     const [loading, setLoading] = useState(true);
