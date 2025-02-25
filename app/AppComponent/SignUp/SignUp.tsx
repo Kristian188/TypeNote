@@ -14,72 +14,69 @@ import Link from "next/link";
 import { AppLogo } from "../AppLogo";
 import EmailInput from "../EmailInput";
 import PasswordInput from "../PasswordInput";
-import {useForm, FormProvider} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import { useToast } from "@/hooks/use-toast"
-import z from "zod";
-import { authSchema, signUpSchema } from "../validationSchema"
+import { signUpSchema } from "../validationSchema";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-
-
-type SignUpFormData = z.infer<typeof signUpSchema>
+import { useUserStore } from "@/store/useUserStore";
+// Infer the form data type from the signUpSchema
+type SignUpFormData = z.infer<typeof signUpSchema>;
 
 export default function SignUp() {
-  const methods = useForm<SignUpFormData>({ resolver: zodResolver(signUpSchema) });
+  const methods = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+
   const { toast } = useToast();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { signUpFunction, isLoading } = useUserStore();
 
   const onSubmit = async (data: SignUpFormData) => {
-    try {
-      setIsLoading(true);
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({email: data.email, password: data.password}),
+    const res = await signUpFunction({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res.result) {
+      toast({
+        title: "Sign up successful!",
+        description: "Your account has been created.",
       });
-
-      const result = await response.json();
-
-      if(response.ok) {
-        toast({ title: "Sign up successful!", description: "You have signed up."});
-        router.push("/to-dos");
-      } else {
-        if (response.status === 409) {
-          toast({ title: "Sign up failed!", description: "This email is already registered.", variant: "destructive"});
-        } else {
-          toast({ title: "Sign up failed!", description: result.error || "An unknown error occured", variant: "destructive"});
-        }
-      }
-    } catch (error) {
-      console.error("Sign up error:", error);
-      toast({ title: "Sign up failed!", description: "An unknown error occured. Please try again", variant: "destructive"});
-    } finally {
-      setIsLoading(false);
+      router.push("/to-dos");
+    } else if (res.error) {
+      toast({
+        title: res.error,
+        description:
+          "This email is already registered. Please use a different email or try logging in.",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Sign up failed",
+        description: "An unknown error occurred",
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const handleErrorsToast = () => {
-    const {errors} = methods.formState;
+    const { errors } = methods.formState;
     const errorFields = ["email", "password", "confirmPassword"] as const;
 
     errorFields.forEach((field) => {
-      if(errors[field]) {
+      if (errors[field]) {
         toast({
-          title: "Sign up failed!",
-          description: errors[field]?.message?.toString() || "An unknown error occured",
+          title: "Validation Error",
+          description: errors[field]?.message?.toString(),
           variant: "destructive",
         });
       }
     });
-  }
-
-
-
+  };
 
   return (
     <div>
@@ -87,7 +84,6 @@ export default function SignUp() {
       <Card className="w-full max-w-sm py-2">
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit, handleErrorsToast)}>
-
             <CardHeader>
               <CardTitle className="text-[22px] font-bold">Sign Up</CardTitle>
               <CardDescription>
@@ -101,17 +97,17 @@ export default function SignUp() {
               <div className="mt-4 text-sm flex items-center justify-center gap-1">
                 <span>Already have an account?</span>
                 <Label className="text-primary">
-                  <Link href={"/"}>Sign in</Link>
+                  <Link href="/">Sign in</Link>
                 </Label>
               </div>
             </CardContent>
             <CardFooter>
               <Button type="submit" className="w-full">
-                {isLoading ? "Loading..." : "create an account"}
+                {isLoading ? "loading..." : "create an account"}
               </Button>
             </CardFooter>
-            </form>
-            </FormProvider>
+          </form>
+        </FormProvider>
       </Card>
     </div>
   );
