@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogoutButton } from "@/LogoutBtn"; 
-import { useUserStore } from "@/store/UserStore"; 
+import { LogoutButton } from "@/LogoutBtn";
+import { useUserStore } from "@/store/useUserStore"; 
 export default function Dashboard() {
     const { setUser, user } = useUserStore();
     const [loading, setLoading] = useState(true);
