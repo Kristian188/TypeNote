@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUserStore } from "./store/UserStore";
+import { useUserStore } from "./store/useUserStore";
 import { Button } from "@/components/ui/button";
 
 export function LogoutButton() {
