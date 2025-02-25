@@ -1,66 +1,57 @@
 "use client";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardFooter,
-} from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import Link from "next/link";
-
-import { AppLogo } from  "../AppLogo";
+import { AppLogo } from "../AppLogo";
 import EmailInput from "../EmailInput";
 import PasswordInput from "../PasswordInput";
-import {useForm, FormProvider} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import { useToast } from "@/hooks/use-toast"
-import z from "zod";
-import { authSchema } from "../validationSchema"
-import { useRouter } from "next/navigation"; 
-import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { authSchema } from "../validationSchema";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
+import { useUserStore } from "@/store/useUserStore";
 
+// Infer the type from the schema
 type AuthFormData = z.infer<typeof authSchema>;
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+export default function SignIn() {
   const methods = useForm<AuthFormData>({ resolver: zodResolver(authSchema) });
   const { toast } = useToast();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const { loginFunction, isLoading } = useUserStore();
 
   const onSubmit = async (data: AuthFormData) => {
-   try {
-    setIsLoading(true);
-    const response = await fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({email: data.email, password: data.password}),
-    });
-    const result = await response.json();
+    const IsLogged = await loginFunction(data);
 
-    if(response.ok) {
-      toast({ title: "Sign in successful!", description: "You have signed in."});
+    console.log(IsLogged);
+
+    if (IsLogged.isLoggedIn) {
+      toast({
+        title: "Sign in successful!",
+        description: "You have signed in.",
+      });
       router.push("/to-dos");
-    } else { 
-      toast({ title: "Sign in failed!", description: result.error || "An unknown error occured", variant: "destructive"});
-
+    } else {
+      toast({
+        title: "Sign in failed",
+        description: IsLogged.error,
+        variant: "destructive",
+      });
     }
-   } catch (error) {
-    console.error("Sign in error:", error);
-    toast({ title: "Sign in failed!", description: "An unknown error occured. Please try again", variant: "destructive"});
-  } finally {
-    setIsLoading(false);
-  }
+
+    console.log(IsLogged);
   };
 
   const handleErrorToast = () => {
@@ -68,7 +59,7 @@ export function LoginForm({
     const errorFields = ["email", "password"] as const;
 
     errorFields.forEach((field) => {
-      if(errors[field]) {
+      if (errors[field]) {
         toast({
           title: "Validation Error",
           description: errors[field]?.message?.toString(),
@@ -76,42 +67,38 @@ export function LoginForm({
         });
       }
     });
-
-
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div>
       <AppLogo />
-      <Card className ="w-full max-w-sm py-2">
+      <Card className="w-full max-w-sm py-2">
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit, handleErrorToast)}>
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-5 mt-3">
-            <EmailInput name="Email" label="email" />
-            <PasswordInput name="password" label="Password"/>
-
-
-              <div className ="mt-4  text-sm flex items-center justify-center gap-1">
+            <CardHeader>
+              <CardTitle className="text-[22px] font-bold">Login</CardTitle>
+              <CardDescription>
+                Enter your email below to login to your account.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-5 mt-3">
+              <EmailInput name="email" label="Email" />
+              <PasswordInput name="password" label="Password" />
+              <div className="mt-4 text-sm flex items-center justify-center gap-1">
                 <span>Don&apos;t have an account?</span>
-                <Label className ="text-primary">
-                  <Link href={"/sign-up"}>Sign up</Link>
+                <Label className="text-primary">
+                  <Link href="/sign-up">Sign up</Link>
                 </Label>
               </div>
-        </CardContent>
-        <CardFooter>
-          <Button type="submit" className="w-full">
-            {isLoading ? "Loading..." : "Sign in"}
-          </Button>
-        </CardFooter>
-        </form>
-        </FormProvider>,
+            </CardContent>
+            <CardFooter>
+              <Button type="submit" className="w-full">
+                {isLoading ? "loading..." : "Sign In"}
+              </Button>
+            </CardFooter>
+          </form>
+        </FormProvider>
       </Card>
     </div>
-  )
+  );
 }
