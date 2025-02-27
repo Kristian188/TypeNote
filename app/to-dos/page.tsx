@@ -6,6 +6,7 @@ import { LogoutButton } from "@/LogoutBtn";
 import { useUserStore } from "@/store/useUserStore"; 
 import { TaskHeader } from "./Components/TaskHeader/TaskHeader";
 import Stats from "./Components/Stats/Stats";
+import { Button } from "@/components/ui/button";
 export default function Dashboard() {
     const { setUser, user } = useUserStore();
     const [loading, setLoading] = useState(true);
@@ -44,13 +45,29 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="min-h-screen border flex items-center w-full justify-center ">
-            <div className="w-[55%] h-[90%] border flex flex-col gap-2 bg-white shadow-md rounded-md p-7">
+        <div className="min-h-screen border flex items-center w-full justify-center popins ">
+            <div className="w-[55%] border flex flex-col gap-6 bg-white shadow-md rounded-md p-8">
                 <TaskHeader />
                 <Stats />
+                <AllTasksHeader />
+                
             </div>
 
         </div>
     )
 
+}
+
+function AllTasksHeader() {
+    return (
+        <div className="flex justify-between items-center mt-4 mb-3">
+            <div className="flex flex-col gap-1">
+                <h2 className="text-xl font-semibold">Today's Task</h2>
+                <p className="text-sm text-gray-400">27 February 2025</p>
+            </div>
+
+            <Button>Add Task</Button>
+
+        </div>
+    )
 }
