@@ -7,6 +7,8 @@ import { useUserStore } from "@/store/useUserStore";
 import { TaskHeader } from "./Components/TaskHeader/TaskHeader";
 import Stats from "./Components/Stats/Stats";
 import { Button } from "@/components/ui/button";
+import { TasksArea } from "./Components/TasksArea/TasksArea";
+import { TaskFooter } from "./Components/TaskFooter/TaskFooter";
 export default function Dashboard() {
     const { setUser, user } = useUserStore();
     const [loading, setLoading] = useState(true);
@@ -50,7 +52,8 @@ export default function Dashboard() {
                 <TaskHeader />
                 <Stats />
                 <AllTasksHeader />
-                
+                <TasksArea />
+                <TaskFooter />
             </div>
 
         </div>
