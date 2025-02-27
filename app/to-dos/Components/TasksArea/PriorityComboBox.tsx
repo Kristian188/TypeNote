@@ -34,7 +34,7 @@ const priorities = [
 ];
 
 export function ComboboxDemo() {
-    const [oepn, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState("");
 
     return (
