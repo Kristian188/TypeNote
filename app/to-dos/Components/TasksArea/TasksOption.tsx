@@ -23,7 +23,6 @@ export function TasksOption() {
             console.log("Delete clicked");
         }
     };
-    ⌘
 
     return(
         <DropdownMenu>
