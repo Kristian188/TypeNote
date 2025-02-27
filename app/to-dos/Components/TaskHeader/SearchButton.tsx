@@ -11,7 +11,7 @@ import { IoSearchSharp } from "react-icons/io5";
 export function SearchButton() {
     return (
         <Popover>
-            <PopoverTrigger>
+            <PopoverTrigger asChild>
                 <Button variant="ghost"> 
                     <IoSearchSharp className="text-[20px]" /> 
                 </Button>
