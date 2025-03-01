@@ -20,8 +20,8 @@ export function TasksDialog() {
   function handleSaveTask() {
     if (!taskName.trim()) return;
     console.log("Saving task:", taskName);
-    setTaskName(""); // Clear input after save
-    setIsOpen(false); // Close dialog
+    setTaskName("");
+    setIsOpen(false);
   }
 
   return (
@@ -36,8 +36,6 @@ export function TasksDialog() {
         <DialogHeader>
           <DialogTitle className="text-xl">Add Task</DialogTitle>
         </DialogHeader>
-
-        {/* Simple Task Input */}
         <Input
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
