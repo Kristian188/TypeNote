@@ -9,6 +9,7 @@ import Stats from "./Components/Stats/Stats";
 import { Button } from "@/components/ui/button";
 import { TasksArea } from "./Components/TasksArea/TasksArea";
 import { TaskFooter } from "./Components/TaskFooter/TaskFooter";
+import { TasksDialog } from "./Components/Dialogs/TaskDialog/TaskDialog";
 export default function Dashboard() {
     const { setUser, user } = useUserStore();
     const [loading, setLoading] = useState(true);
@@ -69,7 +70,7 @@ function AllTasksHeader() {
                 <p className="text-sm text-gray-400">27 February 2025</p>
             </div>
 
-            <Button>Add Task</Button>
+            <TasksDialog />
 
         </div>
     )
