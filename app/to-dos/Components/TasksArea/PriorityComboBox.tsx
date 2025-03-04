@@ -16,6 +16,9 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { Task } from "@/app/data/Task";
+import { useTasksStore } from "@/app/store/useTasksStore";
+import { set } from "zod";
 
 
 const priorities = [
@@ -36,6 +39,32 @@ const priorities = [
 export function ComboboxDemo() {
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState("");
+    const { updateTaskfunction } = useTasksStore();
+
+    console.log(singleTask);
+
+    React.useEffect(() => {
+        setValue(singleTask.priority);
+    }, [singleTask]);
+
+    function isValidPriority(value: string): value is "low" | "medium" | "high" {
+        return value === "low" || value === "medium" || value === "high";
+    }
+
+    function onSelectFunction(currentValue: string) {
+        if (!isValidPriority(currentValue)) {
+            return;
+        }
+        const updatedTask: Task = { ...singleTask, priority: currentValue };
+
+        setValue(currentValue);
+        updateTaskfunction(updatedTask);
+        setOpen(false);
+    }
+
+
+
+
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -60,10 +89,7 @@ export function ComboboxDemo() {
                                 <CommandItem
                                     key={framework.value}
                                     value={framework.value}
-                                    onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue);
-                                        setOpen(false);
-                                    }}
+                                    onSelect={onSelectFunction}
 
                                 >
                                     {framework.label}
