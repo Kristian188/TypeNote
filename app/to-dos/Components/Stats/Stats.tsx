@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { allTasks } from "@/app/data/Task";
+import { useTasksStore } from "@/store/useTasksStore";
 
 type SingleStat = { label: string; unit: string; counter: number };
 
@@ -9,6 +11,19 @@ export default function Stats() {
         { label: "Pending", unit: "Tasks", counter: 4 },
         { label: "Progress", unit: "%", counter: 4 },
     ]);
+    const { tasks } = useTasksStore();
+
+    useEffect(() => {
+        const getCompletedTasks = tasks.filter((task) => task.status === "completed").length;
+        const getPendingTasks = allTasks.length - getCompletedTasks;
+        const getProgressValue = (getCompletedTasks / allTasks.length) * 100;
+
+        setStatsArray([
+            { label: "Completed", unit: "Tasks", counter: getCompletedTasks },
+            { label: "Pending", unit: "Tasks", counter: getPendingTasks },
+            { label: "Progress", unit: "%", counter: parseInt(getProgressValue.toFixed(2)) },
+        ]);
+    }, [tasks]);
 
     return (
         <div className="flex gap-5 py-5">
