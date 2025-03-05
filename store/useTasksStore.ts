@@ -36,4 +36,19 @@ export const useTasksStore = create<useTasksStoreInterface>((set, get) => {
     };
 
 });
+
+function sortTasksByCompleted(tasks: Task[]): Task[] {
+   
+    const sortedTasks = tasks.sort((a, b) => {
+      if (a.status === "in progress" && b.status !== "in progress") {
+        return -1; 
+      }
+      if (a.status !== "in progress" && b.status === "in progress") {
+        return 1;
+      }
+      return 0; 
+    });
+  
+    return sortedTasks;
+  }
             
