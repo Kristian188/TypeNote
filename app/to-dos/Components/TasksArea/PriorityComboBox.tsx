@@ -17,7 +17,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { Task } from "@/app/data/Task";
-import { useTasksStore } from "@/app/store/useTasksStore";
+import { useTasksStore } from "@/store/useTasksStore";
 import { set } from "zod";
 
 
@@ -36,7 +36,7 @@ const priorities = [
     },
 ];
 
-export function ComboboxDemo() {
+export function ComboboxDemo({ singleTask }: { singleTask: Task }) {
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState("");
     const { updateTaskfunction } = useTasksStore();
