@@ -1,7 +1,7 @@
 import { Lucia } from "lucia";
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { db } from "./db/drizzle";
-import { userTable, sessionTable } from "./db/schema";
+import { db } from "./app/db/drizzle";
+import { userTable, sessionTable } from "./app/db/schema";
 import type { Session, User } from "lucia";
 import { cookies } from "next/headers";
 import { cache } from "react";

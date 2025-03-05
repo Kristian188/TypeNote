@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db/drizzle";
+import { db } from "@/app/db/drizzle";
 import { verify } from "@node-rs/argon2";
 import { lucia } from "@/aut"; 
-import { userTable } from "@/db/schema";
+import { userTable } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
 
 export type Result = { success: true } | { error: string };

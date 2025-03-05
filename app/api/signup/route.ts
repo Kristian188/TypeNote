@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db/drizzle";
+import { db } from "@/app/db/drizzle";
 import { hash } from "@node-rs/argon2";
 import { lucia } from "@/aut";
 import { generateId } from "lucia";
-import { userTable } from "@/db/schema";
+import { userTable } from "@/app/db/schema";
 import { Result } from "../signin/route";
 
 export async function POST(request: Request): Promise<NextResponse<Result>> {
