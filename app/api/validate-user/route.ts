@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { validateRequest } from "@/aut";
+import { validateRequest } from "@/app/aut";
 
 export async function GET() {
   try {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { logout } from "@/logout";
+import { logout } from "@/app/logout"; 
 
 export async function GET() {
   try {

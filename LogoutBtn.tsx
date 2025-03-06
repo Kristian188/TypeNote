@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUserStore } from "./store/useUserStore";
+import { useUserStore } from "./app/store/useUserStore";
 import { IoMdLogOut } from "react-icons/io";
 
 export function LogoutButton() {

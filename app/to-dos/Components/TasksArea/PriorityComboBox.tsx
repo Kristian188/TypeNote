@@ -16,8 +16,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Task } from "@/app/data/Tasks";
-import { useTasksStore } from "@/app/stores/useTasksStore";
+import { Task } from "@/app/data/Task"; 
+import { useTasksStore } from "@/app/store/useTasksStore"; 
 import { toast } from "@/hooks/use-toast";
 
 const priorities = [

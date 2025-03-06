@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/app/db/drizzle";
 import { verify } from "@node-rs/argon2";
-import { lucia } from "@/aut"; 
+import { lucia } from "@/app/aut"; 
 import { userTable } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
 

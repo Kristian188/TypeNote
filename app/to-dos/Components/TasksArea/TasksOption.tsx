@@ -1,7 +1,7 @@
 "use client";
-import { Task } from "@/app/data/Tasks";
-import { useTasksStore } from "@/app/stores/useTasksStore";
-import { useUserStore } from "@/app/stores/useUserStore";
+import { Task } from "@/app/data/Task";
+import { useTasksStore } from "@/app/store/useTasksStore"; 
+import { useUserStore } from "@/app/store/useUserStore"; 
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

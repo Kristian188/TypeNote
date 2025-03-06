@@ -15,6 +15,13 @@
       "when": 1740068022660,
       "tag": "0001_confused_scourge",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741272751968,
+      "tag": "0002_thick_risque",
+      "breakpoints": true
     }
   ]
 }

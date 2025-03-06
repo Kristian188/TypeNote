@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { LogoutButton } from "@/LogoutBtn";
-import { useUserStore } from "@/app/stores/useUserStore";
+import { useUserStore } from "@/app/store/useUserStore"; 
 import { useTheme } from "next-themes";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";

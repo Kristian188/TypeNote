@@ -21,7 +21,7 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
-import { useUserStore } from "@/store/useUserStore";
+import { useUserStore } from "@/app/store/useUserStore";
 
 // Infer the type from the schema
 type AuthFormData = z.infer<typeof authSchema>;
