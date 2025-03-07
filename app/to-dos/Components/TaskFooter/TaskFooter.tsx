@@ -6,7 +6,7 @@ export function TasksFooter() {
   return (
     <div>
       <div className="flex justify-between mt-5 items-center">
-        <p className="text-gray-500 text-sm">{tasks.length} Tasks</p>
+        <p className="text-gray-500 text-sm">{tasks.length} Notes</p>
         <DeleteDialog />
       </div>
     </div>

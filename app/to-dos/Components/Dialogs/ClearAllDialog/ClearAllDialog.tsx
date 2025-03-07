@@ -37,10 +37,10 @@ export function DeleteDialog() {
 
   useEffect(() => {
     if (taskSelected) {
-      setMessage(`This action cannot be undone. This will permanently delete the task 
+      setMessage(`This action cannot be undone. This will permanently delete the note 
       [${taskSelected.name}] and remove it from server!`);
     } else {
-      setMessage(`This action cannot be undone. This will permanently delete all tasks
+      setMessage(`This action cannot be undone. This will permanently delete all notes
             and remove them from the server!`);
     }
   }, [taskSelected]);
@@ -52,14 +52,14 @@ export function DeleteDialog() {
       if (result.success) {
         // Displaying a toast notification with title and description
         toast({
-          title: "Task Deleted",
-          description: `The task  has been deleted successfully.`,
+          title: "Note Deleted",
+          description: `The note has been deleted successfully.`,
         });
       } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: "There was an error deleting the task.",
+          description: "There was an error deleting the note.",
         });
       }
     } else {
@@ -68,14 +68,14 @@ export function DeleteDialog() {
       if (result.success) {
         // Displaying a toast notification with title and description
         toast({
-          title: "Tasks Deleted",
-          description: `All tasks has been deleted successfully.`,
+          title: "Notes Deleted",
+          description: `All notes has been deleted successfully.`,
         });
       } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: "There was an error deleting tasks.",
+          description: "There was an error deleting notes.",
         });
       }
     }

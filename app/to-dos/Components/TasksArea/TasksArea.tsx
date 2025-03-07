@@ -29,8 +29,8 @@ export function TasksArea() {
         <div className="  h-full w-full flex items-center justify-center  flex-col gap-6">
           <FaUmbrellaBeach className="text-[79px] text-slate-500 opacity-85" />
           <span className="text-sm text-slate-400 opacity-85 text-center">
-            It looks like there are no tasks available. <br /> Click above to
-            add a new task
+            It looks like there are no notes available. <br /> Click above to
+            add a new note.
           </span>
         </div>
       ) : (

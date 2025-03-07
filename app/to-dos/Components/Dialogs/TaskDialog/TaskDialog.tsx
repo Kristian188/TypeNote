@@ -120,14 +120,14 @@ export function TasksDialog() {
       if (result.success) {
         // Displaying a toast notification with title and description
         toast({
-          title: "Task Updated",
-          description: `The task  has been successfully updated.`,
+          title: "Note Updated",
+          description: `The note  has been successfully updated.`,
         });
       } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: "There was an error updating the task.",
+          description: "There was an error updating the note.",
         });
       }
     }
@@ -171,7 +171,7 @@ export function TasksDialog() {
       <DialogTrigger asChild>
         <Button className="flex items-center gap-1">
           <FaPlus />
-          <span>New Task</span>
+          <span>New Note</span>
         </Button>
       </DialogTrigger>
       {/* Form Provider */}
@@ -179,10 +179,10 @@ export function TasksDialog() {
         <DialogContent className="p-7 poppins">
           <DialogHeader>
             <DialogTitle className="text-xl">
-              {taskSelected ? "Edit Task" : "Add Task"}
+              {taskSelected ? "Edit Note" : "Add Note"}
             </DialogTitle>
             <DialogDescription>
-              {`Add a new task here. Click save when you're done.`}
+              {`Add a new note here. Click save when you're done.`}
             </DialogDescription>
           </DialogHeader>
 
@@ -195,7 +195,7 @@ export function TasksDialog() {
                   <div>loading...</div>
                 ) : (
                   <div className="flex items-center gap-1">
-                    <span>Save task</span>
+                    <span>Save note</span>
                   </div>
                 )}
               </Button>

@@ -23,8 +23,8 @@ function AppLogo() {
             </div>
 
             <div className="font-bold text-3xl flex gap-1 justify-center items-center">
-                <span className="text-primary">Quick</span>
-                <span>Task</span>
+                <span className="text-primary">Type</span>
+                <span>Note</span>
             </div>
         </div>
     );

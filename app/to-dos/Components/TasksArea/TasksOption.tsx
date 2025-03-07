@@ -69,13 +69,13 @@ export function TasksOptions({ singleTask }: { singleTask: Task }) {
         // Displaying a toast notification with title and description
         toast({
           title: "Task Copied",
-          description: `The task  has been copied successfully.`,
+          description: `The note  has been copied successfully.`,
         });
       } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: "There was an error copying the task.",
+          description: "There was an error copying the note.",
         });
       }
 

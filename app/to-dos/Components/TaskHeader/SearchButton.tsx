@@ -19,7 +19,7 @@ export function SearchButton() {
             <PopoverContent>
                 <Input
                     id="search"
-                    placeholder="Search tasks..."
+                    placeholder="Search notes..."
                     className="mt-2"
                 />
             </PopoverContent>
