@@ -12,6 +12,7 @@ Dark mode support
 
 UI components with ShadCN and Material UI
 
+
 🛠 Tech Stack
 
 Next.js (App Router)
