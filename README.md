@@ -26,3 +26,5 @@ ShadCN/UI (UI components)
 Material UI (Additional UI components)
 
 React Icons (For icons)
+
+Neon Tech (PostgreSQL database)
